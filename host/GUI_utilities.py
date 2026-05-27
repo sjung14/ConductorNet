@@ -1,6 +1,8 @@
 import math
 angle = 0
 
+SCREEN_WIDTH = 1280
+SCREEN_HEIGHT = 720
 
 def calc_cir_pos(x, y, radius, dt, period):
     global angle
