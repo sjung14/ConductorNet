@@ -1,0 +1,14 @@
+https://python-sounddevice.readthedocs.io/en/0.5.3/usage.html
+
+Notes:
+sd.play(myarray, fs) // myarray is Numpy array, fs is sampling frequency
+
+sd.stop() 
+
+sd.wait() // block python interpreter until playback is finished
+
+Device selection
+terminal: python -c "import sounddevice as sd; print(sd.query_devices())" // gives a list of supported devices
+sd.default.device = 'digital output' or device ID
+
+To adjust volume in sounddevice, need to mutliply float x Numpy array
