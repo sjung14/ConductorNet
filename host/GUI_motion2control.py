@@ -5,6 +5,7 @@
     higher -> high pass filter, lower -> low pass filter
 '''
 import GUI_utilities as ut
+import math
 
 
 class Control:
@@ -19,14 +20,25 @@ class Control:
         self.__buf_filled = False
         self.__center_x = '*'   # will be used for filter stabilization
         self.__center_y = '*'   # will be used for filter stabilization
+        self.AVG_ENERGY = (ut.TEMP_DOT_RADIUS
+                           * (2 * math.pi / ut.TEMP_DOT_PERIOD)) ** 2
 
     def set_prev_pos(self, mouse_pos):
         self.__prev_x, self.__prev_y = mouse_pos
 
-    def get_samplerate(self, x, y, dt):
+    def get_speed(self, x, y, dt):
+        '''
+        Get sample rate
+        Also updates __prev_x & __prev_y
+        Minimum 0.5 and Maximum 2.0
+        '''
         if dt == 0:
             return 1
-        return ((x - self.__prev_x)**2 + (y - self.__prev_y)**2) / ut.TEMP_DOT_RADIUS**2    # noqa: E501
+        old_x = self.__prev_x
+        old_y = self.__prev_y
+        self.set_prev_pos((x, y))
+        speed = (((x - old_x) / dt)**2 + ((y - old_y) / dt)**2) / self.AVG_ENERGY    # noqa: E501
+        return max(0.5, min(speed, 2.0))
     
     '''
     The GUI will instruct users to draw a perfect circle with fixed tempo to introduce default sound setting    # noqa: E501

@@ -72,7 +72,7 @@ while running:
     surface_mouse = font.render(mouse_text_y + str(center_y), True, (255, 255, 255))  # noqa: E501
     screen.blit(surface_mouse, (400, ut.SCREEN_HEIGHT - 30))
     # Motion energy
-    motion_energy = control.get_samplerate(mouse_x, mouse_y, dt)
+    motion_energy = control.get_speed(mouse_x, mouse_y, dt)
     surface_mouse = font.render(mouse_text_motion + str(motion_energy), True, (255, 255, 255))     # noqa: E501
     screen.blit(surface_mouse, (800, ut.SCREEN_HEIGHT - 30))
 

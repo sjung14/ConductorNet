@@ -21,6 +21,7 @@ import audiotsm
 from audiotsm.io.wav import WavReader
 from audiotsm.io.stream import StreamWriter
 from audiotsm import phasevocoder
+import GUI_utilities as ut
 
 
 class AudioControl:
@@ -43,14 +44,12 @@ class AudioControl:
                 self.tsm = phasevocoder(reader.channels, speed=1.0)
 
                 self.ready.set()
+                read_samples = self.tsm.read_from(reader)
+                print("[DEBUG] read samples: " + str(read_samples))
 
-                self.tsm.run(reader, writer)
+                self.tsm.run(reader, writer, flush=True)
 
     def start(self):
         self.thread = threading.Thread(target=self.stream_audio, daemon=True)
         self.thread.start()
-        # TODO: music playing stops after first reader is empty -- need to continuously fill in
-    
-    
-
-    
+   

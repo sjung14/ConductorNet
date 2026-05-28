@@ -2,3 +2,6 @@
 1. sounddevice -> audiotsm
     Couldn't do real-time speed change using sounddevice. Trying out audiotsm for phase change.
     Using thread as sound playing library blocks GUI from updating --> have separate thread for sound playing
+
+5/28/26
+1. Can stream entire song now & real time speed change without pitch change
