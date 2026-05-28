@@ -49,6 +49,7 @@ class AudioControl:
     def start(self):
         self.thread = threading.Thread(target=self.stream_audio, daemon=True)
         self.thread.start()
+        # TODO: music playing stops after first reader is empty -- need to continuously fill in
     
     
 
