@@ -1,0 +1,4 @@
+5/27/26 Wed
+1. sounddevice -> audiotsm
+    Couldn't do real-time speed change using sounddevice. Trying out audiotsm for phase change.
+    Using thread as sound playing library blocks GUI from updating --> have separate thread for sound playing

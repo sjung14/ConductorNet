@@ -4,7 +4,6 @@
     right -> louder volume, left -> smaller volume
     higher -> high pass filter, lower -> low pass filter
 '''
-import math
 import GUI_utilities as ut
 
 
@@ -26,8 +25,8 @@ class Control:
 
     def get_samplerate(self, x, y, dt):
         if dt == 0:
-            return 0
-        return math.sqrt(((x - self.__prev_x) / dt)**2 + ((y - self.__prev_y) / dt)**2)     # noqa: E501
+            return 1
+        return ((x - self.__prev_x)**2 + (y - self.__prev_y)**2) / ut.TEMP_DOT_RADIUS**2    # noqa: E501
     
     '''
     The GUI will instruct users to draw a perfect circle with fixed tempo to introduce default sound setting    # noqa: E501
@@ -44,7 +43,7 @@ class Control:
             
             # Update center of movement
             self.__center_x = self.__sum_x / self.__N - ut.SCREEN_WIDTH / 2
-            self.__center_y = self.__sum_y / self.__N - ut.SCREEN_HEIGHT / 2
+            self.__center_y = ut.SCREEN_HEIGHT / 2 - self.__sum_y / self.__N
         else:
             # Update sum
             self.__sum_x += x
